@@ -1,17 +1,23 @@
 import { createGlobalStyle } from "styled-components";
 import "./App.css";
+import TodoHead from "./components/TodoHead";
+import TodoList from "./components/TodoList";
+import TodoTemplate from "./components/TodoTemplate";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: gray;
+    background: #e9ecef;;
   }
 `;
 
 function App() {
   return (
     <>
-      <GlobalStyle></GlobalStyle>
-      <div>Hello ㅋㅋ</div>
+      <GlobalStyle />
+      <TodoTemplate>
+        <TodoHead />
+        <TodoList />
+      </TodoTemplate>
     </>
   );
 }
