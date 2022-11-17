@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
 import { MdAdd } from "react-icons/md";
+import { useState } from "react";
 
 const CircleButton = styled.button`
   background: #38d9a9;
@@ -46,11 +47,53 @@ const CircleButton = styled.button`
     height: 50px;
   }
 `;
+const InsertFormPositioner = styled.div`
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  ${(props) =>
+    props.open &&
+    !props.open &&
+    css`
+      transition: 0.5s all ease-in-out;
+    `}
+`;
+const InsertForm = styled.form`
+  background: #f8f9fa;
+  padding-left: 32px;
+  padding-top: 32px;
+  padding-right: 32px;
+  padding-bottom: 72px;
+
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-top: 1px solid #e9ecef;
+`;
+const Input = styled.input`
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  box-sizing: border-box;
+`;
 
 function TodoCreate() {
+  const [open, setOpen] = useState(false);
+  console.log(open);
+  const onToggle = () => setOpen(!open); // true false 토글
   return (
     <>
-      <CircleButton>
+      {open && (
+        <InsertFormPositioner>
+          <InsertForm>
+            <Input autoFocus placeholder="할 일을 입력 후 Enter를 누르세요" />
+          </InsertForm>
+        </InsertFormPositioner>
+      )}
+      <CircleButton onClick={onToggle} open={open}>
         <MdAdd />
       </CircleButton>
     </>
