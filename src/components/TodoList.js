@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useTodoState } from "../TodoContext";
 import TodoItems from "./TodoItems";
 
 const TodoListBlock = styled.div`
@@ -9,23 +10,18 @@ const TodoListBlock = styled.div`
   overflow-y: auto;
 `;
 function TodoList() {
+  const todos = useTodoState();
+
   return (
     <TodoListBlock>
-      <TodoItems text="프로젝트 생성하기" done={true} />
-      <TodoItems text="프로젝트 생성하기" done={true} />
-      <TodoItems text="프로젝트 생성하기" done={false} />
-      <TodoItems text="프로젝트 생성하기" done={false} />
-      <TodoItems text="프로젝트 생성하기" done={true} />
-      <TodoItems text="프로젝트 생성하기" done={false} />
-      <TodoItems text="프로젝트 생성하기" done={true} />
-      <TodoItems text="프로젝트 생성하기" done={false} />
-      <TodoItems text="프로젝트 생성하기" done={true} />
-      <TodoItems text="프로젝트 생성하기" done={false} />
-      <TodoItems text="프로젝트 생성하기" done={true} />
-      <TodoItems text="프로젝트 생성하기" done={false} />
-      <TodoItems text="프로젝트 생성하기" done={true} />
-      <TodoItems text="프로젝트 생성하기" done={false} />
-      <TodoItems text="프로젝트 생성하기" done={true} />
+      {todos.map((todo) => (
+        <TodoItems
+          key={todo.id}
+          id={todo.id}
+          done={todo.done}
+          text={todo.text}
+        />
+      ))}
     </TodoListBlock>
   );
 }
